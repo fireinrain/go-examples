@@ -57,6 +57,22 @@ func readValuesInFile(infile string) (values []int, err error) {
 
 }
 
+//写入文件
+func WriteValuesToFile(values []int, outfile string) error {
+	file, err := os.Create(outfile)
+	if err != nil {
+		fmt.Println("failed to create output file: ", outfile)
+		return err
+	}
+	defer file.Close()
+
+	for _, value := range values {
+		str := strconv.Itoa(value)
+		file.WriteString(str + "\n")
+	}
+	return nil
+}
+
 //获取当前文件运行时的路径
 /**
 path:  C:\Users\sunrise\AppData\Local\Temp\___go_build_sorter_go.exe
