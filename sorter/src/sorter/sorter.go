@@ -1,12 +1,15 @@
 package main
 
 import (
+	"algorithm/bubblesort"
+	"algorithm/qsort"
 	"bufio"
 	"flag"
 	"fmt"
 	"io"
 	"os"
 	"strconv"
+	"time"
 )
 
 //获取命令行参数
@@ -103,6 +106,22 @@ func main() {
 
 	if err == nil {
 		fmt.Println("values: ", values)
+		timeStart := time.Now()
+		switch *algorithm {
+		case "qsort":
+			qsort.QuickSort(values)
+		case "bubblesort":
+			bubblesort.Bubblesort(values)
+		default:
+			fmt.Println("sorting agorithm", *algorithm, "is unknow or unsupported")
+		}
+		timeEnd := time.Now()
+
+		//总耗时
+		fmt.Println("The sorting  process cost", timeEnd.Sub(timeStart), "to complete")
+
+		//写入文件
+		WriteValuesToFile(values, *outfile)
 	} else {
 		fmt.Println("error: ", err)
 	}
