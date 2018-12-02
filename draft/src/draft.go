@@ -9,12 +9,23 @@ type Rect struct {
 	height float64
 }
 
+func NewRect(x, y, width, height float64) *Rect {
+	return &Rect{x, y, width, height}
+}
 func (r *Rect) Area() float64 {
 	return r.width * r.height
 }
 func main() {
 
+	//类构造函数
+	newRect := NewRect(0, 0, 2.3, 4.5)
+	fmt.Println(newRect)
+
 	var rect1 = new(Rect)
+	rect := &Rect{}
+	rect.width = 18
+	rect.height = 2.3
+	fmt.Println("the rect: ", rect.Area())
 	rect1.height = 3.0
 	rect1.width = 7.21
 	fmt.Println("the rect1: ", rect1.Area())
